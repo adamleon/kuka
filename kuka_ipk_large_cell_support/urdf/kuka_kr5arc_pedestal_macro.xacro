@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!-- This file is a resource file for the pedestal which the kr16 robot is mounted on -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:include filename="$(find kuka_resources)/urdf/common_materials.xacro" />
+  
+  <!-- Create the pedestal -->
+  <xacro:macro name="kuka_kr5arc_pedestal" params="prefix parent_link *origin">
+    
+    <!-- Foot link which is the bottom circular plate of the pedestal -->
+    <link name="${prefix}pedestal_foot">
+      <visual>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+	<geometry>
+	  <cylinder radius="0.3515" length="0.03"/>
+	</geometry>
+	<xacro:material_kuka_black/>
+      </visual>
+      <collision>
+	<origin xyz="0 0 0.01" rpy="0 0 0"/>
+	<geometry>
+	  <cylinder radius="0.3515" length="0.03"/>
+	</geometry>
+      </collision>
+    </link>
+
+    <!-- Body link which is the cylinder shape of the pedestal -->
+    <link name="${prefix}pedestal_body">
+      <visual>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+	<geometry>
+	  <cylinder radius="0.3115" length="0.575"/>
+	</geometry>
+	<xacro:material_kuka_black/>
+      </visual>
+      <collision>
+	<origin xyz="0 0 0.01" rpy="0 0 0"/>
+	<geometry>
+	  <cylinder radius="0.3115" length="0.575"/>
+	</geometry>
+      </collision>
+    </link>
+
+    <!-- Head link which is the flat cylinder of the pedestal top -->
+    <link name="${prefix}pedestal_head">
+      <visual>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+	<geometry>
+	  <cylinder radius="0.3115" length="0.02"/>
+	</geometry>
+	<xacro:material_kuka_black/>
+      </visual>
+      <collision>
+	<origin xyz="0 0 0.01" rpy="0 0 0"/>
+	<geometry>
+	  <cylinder radius="0.3115" length="0.02"/>
+	</geometry>
+      </collision>
+    </link>
+    
+    <!-- Mount link for mounting the robot to the pedestal -->
+    <link name="${prefix}pedestal_mount_frame"/>
+    
+    <!-- Joints which connects the pedestal together -->
+    <joint name="${prefix}pedestal_base_joint" type="fixed">
+      <insert_block name="origin"/>
+      <parent link="${parent_link}"/>
+      <child link="${prefix}pedestal_foot"/>
+    </joint>
+
+    <joint name="${prefix}pedestal_ancle_joint" type="fixed">
+      <origin xyz="0 0 0.2875" rpy="0 0 0"/>
+      <parent link="${prefix}pedestal_foot"/>
+      <child link="${prefix}pedestal_body"/>
+    </joint>
+
+    <joint name="${prefix}pedestal_neck_joint" type="fixed">
+      <origin xyz="0 0 0.2875" rpy="0 0 0"/>
+      <parent link="${prefix}pedestal_body"/>
+      <child link="${prefix}pedestal_head"/>
+    </joint>
+    
+    <joint name="${prefix}pedestal_mount_joint" type="fixed">
+      <origin xyz="0.1 0 0.01" rpy="0 0 0"/>
+      <parent link="${prefix}pedestal_head"/>
+      <child link="${prefix}pedestal_mount_frame"/>
+    </joint>
+    
+  </xacro:macro>
+  
+</robot>

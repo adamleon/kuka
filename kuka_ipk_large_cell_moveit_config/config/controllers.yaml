@@ -1,0 +1,16 @@
+controller_list:
+  - name: "qu1/position_trajectory_controller"
+    action_ns: follow_joint_trajectory
+    default: true
+    type: FollowJointTrajectory
+    joints: [qu1_joint_a1, qu1_joint_a2, qu1_joint_a3, qu1_joint_a4, qu1_joint_a5, qu1_joint_a6]
+  - name: "qu2/position_trajectory_controller"
+    action_ns: follow_joint_trajectory
+    default: true
+    type: FollowJointTrajectory
+    joints: [qu2_joint_a1, qu2_joint_a2, qu2_joint_a3, qu2_joint_a4, qu2_joint_a5, qu2_joint_a6]
+  - name: "kr16/position_trajectory_controller"
+    action_ns: follow_joint_trajectory
+    default: true
+    type: FollowJointTrajectory
+    joints: [kr16_joint_a1, kr16_joint_a2, kr16_joint_a3, kr16_joint_a4, kr16_joint_a5, kr16_joint_a6]

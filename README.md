@@ -1,17 +1,21 @@
-# KUKA-bulbasaur
-This repository is a copy of the master branch at the IPK Gitlab repository exluding commit history and other branches.
-A protected commit of a large `default_warehouse_mongo_db` inside `kuka_agilus_moveit_config` prevents this repository with full history to be pushed directly.
-The database should be deleted from the Gitlab repository, the commit history cleaned and the cleaned repository pushed to a new repository.
+# kuka_ipk
+Repository based on [kuka_experimental](https://github.com/ros-industrial/kuka_experimental). Holds support files, moveit configurations and network configurations specific to the IPK laboratory.
 
-## Description
-ROS packages for the KUKA robots at the Department of Production and Quality Engineering, Norwegian University of Science and Technology
+## Prerequisite
+* A working ROS Environment. ROS Indigo can be installed using [this guide](http://wiki.ros.org/indigo/Installation/Ubuntu)
+* ros_control `sudo apt-get install ros-indigo-ros-control ros-indigo-ros-controllers`
+* MoveIt! `sudo apt-get install ros-indigo-moveit-full`
 
-## Styleguide
-Please follow the ROS [Python](http://wiki.ros.org/PyStyleGuide) and [C++](http://wiki.ros.org/CppStyleGuide) styleguides.
-
-## Robots
-* KUKA KR120 R2500 PRO (Quantec)
-* KUKA KR16-2
-* KUKA KR5 ARC 
-* KUKA KR6 R900 sixx (Agilus)
+## Instructions
+* Create and initialize a workspace, explained in [this ROS Tutorial](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment)
+* Navigate to `/your/workspace/src/`
+* Run the following commands to install the packages:
+```
+git clone git@git.ipk.ivt.ntnu.no:adamleon/kuka_ipk.git
+wstool init
+wstool merge kuka_ipk/kuka.rosinstall
+wstool update
+cd ..
+catkin_make
+```
 

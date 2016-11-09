@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>kuka_ipk_kr6r900sixx_support</name>
+  <version>0.1.0</version>
+  <description>
+    <p>
+      Support files for the KR6 R900 sixx manipulators
+      available at the IPK laboratory.
+    </p>
+    <p>
+      This package contains urdf / xacro resources, configuration
+      files and launch files specifically written to work for the
+      small robotic cell at IPK.
+    </p>
+  </description>
+  <author>Asgeir Bjørkedal</author>
+  <maintainer email="asgeir.92@gmail.com">Asgeir Bjørkedal</maintainer>
+  <license>Apache2</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+    <architecture_independent />
+  </export>
+</package>

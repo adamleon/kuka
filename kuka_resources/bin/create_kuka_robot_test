@@ -1,8 +1,0 @@
-#! /usr/bin/env python
-
-import kuka_resources.create_robot_xacro
-
-
-if __name__ == '__main__':
-    kuka_resources.create_robot_xacro.main()
-

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot name="robotic_cell_large" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Include robot xacro -->
+  <xacro:include filename="$(find kuka_kr120_support)/urdf/kr120r2500pro_macro.xacro" />
+  <xacro:include filename="$(find kuka_kr16_support)/urdf/kr16_2_macro.xacro" />
+  <xacro:include filename="$(find kuka_ipk_large_cell_support)/urdf/kuka_quantec_base_bracket_macro.xacro" />
+  <xacro:include filename="$(find kuka_ipk_large_cell_support)/urdf/kuka_kr16_pedestal_macro.xacro" />
+
+  <xacro:property name="PI" value="3.141592653589793"/>
+
+  <!-- Set robot prefix -->
+  <xacro:property name="quantec1_prefix" value="qu1_"/>
+  <xacro:property name="quantec2_prefix" value="qu2_"/>
+  <xacro:property name="kr16_prefix" value="kr16_"/>
+
+  <!-- Create a fixed world coordinate system -->
+  <link name="world"/>
+
+  <!-- Load the brackets and pedestal -->
+  <xacro:kuka_quantec_base_bracket prefix="${quantec1_prefix}" parent_link="world">
+    <origin xyz="-1.345 -1.515 0" rpy="0 0 0"/>
+  </xacro:kuka_quantec_base_bracket>
+
+  <xacro:kuka_quantec_base_bracket prefix="${quantec2_prefix}" parent_link="world">
+    <origin xyz="-1.345 1.515 0" rpy="0 0 0"/>
+  </xacro:kuka_quantec_base_bracket>
+
+  <xacro:kuka_kr16_pedestal prefix="${kr16_prefix}" parent_link="world">
+    <origin xyz="1.345 0 0" rpy="0 0 ${PI}"/>
+  </xacro:kuka_kr16_pedestal>
+
+  <!-- Load the three robots -->
+  <xacro:kuka_kr120r2500pro prefix="${quantec1_prefix}"/>
+  <xacro:kuka_kr120r2500pro prefix="${quantec2_prefix}"/>
+  <xacro:kuka_kr16_2 prefix="${kr16_prefix}"/>
+
+  <!-- Connect the robots to their respective bracket or pedestal -->
+  <joint name="${quantec1_prefix}_mount_joint" type="fixed">
+    <parent link="${quantec1_prefix}bracket_mount_frame"/>
+    <child link="${quantec1_prefix}base_link"/>
+  </joint>
+
+  <joint name="${quantec2_prefix}_mount_joint" type="fixed">
+    <parent link="${quantec2_prefix}bracket_mount_frame"/>
+    <child link="${quantec2_prefix}base_link"/>
+  </joint>
+
+  <joint name="${kr16_prefix}_mount_joint" type="fixed">
+    <parent link="${kr16_prefix}pedestal_mount_frame"/>
+    <child link="${kr16_prefix}base_link"/>
+  </joint>
+</robot>

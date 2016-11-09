@@ -1,0 +1,2 @@
+- git: {local-name: kuka_ipk, uri: 'git@git.ipk.ivt.ntnu.no:adamleon/kuka_ipk.git', version: master}
+- git: {local-name: kuka_experimental, uri: 'https://github.com/ros-industrial/kuka_experimental.git', version: indigo-devel}

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <arg name="sim" default="true" />
+
+  <group ns="kr16">
+    <!-- Load robot description -->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find kuka_ipk_large_cell_support)/urdf/robotic_cell_large.xacro'"/>
+    
+    <!-- Load RSI parameters -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/kr16_params_sim.yaml" command="load" if="$(arg sim)"/>
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/kr16_params.yaml" command="load" unless="$(arg sim)"/>
+    
+    <!-- Start node -->
+    <node name="kuka_hardware_interface" pkg="kuka_rsi_hw_interface"
+      type="kuka_hardware_interface_node" respawn="false"
+      output="screen"
+      required="true"/>
+    
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/kr16_hw_controllers.yaml" command="load"/>
+    
+    <!-- Load standard kuka controller joint names from YAML file to parameter server -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/kr16_controller_joint_names.yaml" command="load"/>
+    
+    <!-- Load controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+        args="position_trajectory_controller joint_state_controller --shutdown-timeout 1"/>
+    
+    <!-- Load RSI simulation node -->
+    <node name='kuka_rsi_simulator' pkg='kuka_rsi_simulator' type="kuka_rsi_simulator" args="127.0.0.1 49150" if="$(arg sim)" />
+  </group>
+
+  <group ns="qu1">
+    <!-- Load robot description -->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find kuka_ipk_large_cell_support)/urdf/robotic_cell_large.xacro'"/>
+    
+    <!-- Load RSI parameters -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/qu1_params_sim.yaml" command="load" if="$(arg sim)"/>
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/qu1_params.yaml" command="load" unless="$(arg sim)"/>
+    
+    <!-- Start node -->
+    <node name="kuka_hardware_interface" pkg="kuka_rsi_hw_interface"
+      type="kuka_hardware_interface_node" respawn="false"
+      output="screen"
+      required="true"/>
+    
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/qu1_hw_controllers.yaml" command="load"/>
+    
+    <!-- Load standard kuka controller joint names from YAML file to parameter server -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/qu1_controller_joint_names.yaml" command="load"/>
+    
+    <!-- Load controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+        args="position_trajectory_controller joint_state_controller --shutdown-timeout 1"/>
+    
+    <!-- Load RSI simulation node -->
+    <node name='kuka_rsi_simulator' pkg='kuka_rsi_simulator' type="kuka_rsi_simulator" args="127.0.0.1 49151" if="$(arg sim)" />
+  </group>
+
+  <group ns="qu2">
+    <!-- Load robot description -->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find kuka_ipk_large_cell_support)/urdf/robotic_cell_large.xacro'"/>
+    
+    <!-- Load RSI parameters -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/qu2_params_sim.yaml" command="load" if="$(arg sim)"/>
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/qu2_params.yaml" command="load" unless="$(arg sim)"/>
+    
+    <!-- Start node -->
+    <node name="kuka_hardware_interface" pkg="kuka_rsi_hw_interface"
+      type="kuka_hardware_interface_node" respawn="false"
+      output="screen"
+      required="true"/>
+    
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/qu2_hw_controllers.yaml" command="load"/>
+    
+    <!-- Load standard kuka controller joint names from YAML file to parameter server -->
+    <rosparam file="$(find kuka_ipk_large_cell_support)/config/qu2_controller_joint_names.yaml" command="load"/>
+    
+    <!-- Load controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+        args="position_trajectory_controller joint_state_controller --shutdown-timeout 1"/>
+    
+    <!-- Load RSI simulation node -->
+    <node name='kuka_rsi_simulator' pkg='kuka_rsi_simulator' type="kuka_rsi_simulator" args="127.0.0.1 49152" if="$(arg sim)" />
+  </group>
+</launch>

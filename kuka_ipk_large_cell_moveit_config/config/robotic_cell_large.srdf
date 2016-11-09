@@ -1,0 +1,234 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="robotic_cell_large">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="quantec1">
+        <chain base_link="qu1_base_link" tip_link="qu1_tool0" />
+    </group>
+    <group name="quantec2">
+        <chain base_link="qu2_base_link" tip_link="qu2_tool0" />
+    </group>
+    <group name="kr16">
+        <chain base_link="kr16_base_link" tip_link="kr16_tool0" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="home_quantec1" group="quantec1">
+        <joint name="qu1_joint_a1" value="0" />
+        <joint name="qu1_joint_a2" value="-1.5708" />
+        <joint name="qu1_joint_a3" value="1.5708" />
+        <joint name="qu1_joint_a4" value="0" />
+        <joint name="qu1_joint_a5" value="1.5708" />
+        <joint name="qu1_joint_a6" value="0" />
+    </group_state>
+    <group_state name="home_quantec2" group="quantec2">
+        <joint name="qu2_joint_a1" value="0" />
+        <joint name="qu2_joint_a2" value="-1.5708" />
+        <joint name="qu2_joint_a3" value="1.5708" />
+        <joint name="qu2_joint_a4" value="0" />
+        <joint name="qu2_joint_a5" value="1.5708" />
+        <joint name="qu2_joint_a6" value="0" />
+    </group_state>
+    <group_state name="home_kr16" group="kr16">
+        <joint name="kr16_joint_a1" value="0" />
+        <joint name="kr16_joint_a2" value="-1.5708" />
+        <joint name="kr16_joint_a3" value="1.5708" />
+        <joint name="kr16_joint_a4" value="0" />
+        <joint name="kr16_joint_a5" value="1.5708" />
+        <joint name="kr16_joint_a6" value="0" />
+    </group_state>
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="FixedBaseQu1" type="fixed" parent_frame="world" child_link="qu1_bracket" />
+    <virtual_joint name="FixedBaseQu2" type="fixed" parent_frame="world" child_link="qu2_bracket" />
+    <virtual_joint name="FixedBaseKr16" type="fixed" parent_frame="world" child_link="kr16_pedestal_foot" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="kr16_base_link" link2="kr16_link_1" reason="Adjacent" />
+    <disable_collisions link1="kr16_base_link" link2="kr16_link_2" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="kr16_pedestal_body" reason="Adjacent" />
+    <disable_collisions link1="kr16_base_link" link2="kr16_pedestal_foot" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu1_bracket" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu1_link_3" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu1_link_4" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu1_link_5" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu1_link_6" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu2_link_3" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu2_link_4" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu2_link_5" reason="Never" />
+    <disable_collisions link1="kr16_base_link" link2="qu2_link_6" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="kr16_link_2" reason="Adjacent" />
+    <disable_collisions link1="kr16_link_1" link2="kr16_link_3" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="kr16_pedestal_body" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="kr16_pedestal_foot" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu1_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu1_link_3" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu1_link_4" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu1_link_5" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu1_link_6" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu2_link_3" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu2_link_4" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu2_link_5" reason="Never" />
+    <disable_collisions link1="kr16_link_1" link2="qu2_link_6" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="kr16_link_3" reason="Adjacent" />
+    <disable_collisions link1="kr16_link_2" link2="kr16_link_4" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="kr16_link_5" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="kr16_link_6" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="kr16_pedestal_body" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="kr16_pedestal_foot" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu1_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_2" link2="qu2_link_3" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="kr16_link_4" reason="Adjacent" />
+    <disable_collisions link1="kr16_link_3" link2="kr16_link_5" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="kr16_link_6" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="kr16_pedestal_body" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="kr16_pedestal_foot" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="qu1_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_3" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="kr16_link_5" reason="Adjacent" />
+    <disable_collisions link1="kr16_link_4" link2="kr16_link_6" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="kr16_pedestal_foot" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="qu1_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_4" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_5" link2="kr16_link_6" reason="Adjacent" />
+    <disable_collisions link1="kr16_link_5" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_5" link2="qu1_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_5" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_5" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_5" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_5" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu1_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu1_link_6" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu2_link_4" reason="Never" />
+    <disable_collisions link1="kr16_link_6" link2="qu2_link_6" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="kr16_pedestal_foot" reason="Adjacent" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu1_bracket" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu1_link_3" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu1_link_4" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu1_link_5" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu1_link_6" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu2_link_3" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu2_link_4" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu2_link_5" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_body" link2="qu2_link_6" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu1_base_link" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu1_bracket" reason="Adjacent" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu1_link_3" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu1_link_4" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu1_link_5" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu1_link_6" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu2_bracket" reason="Adjacent" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu2_link_3" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu2_link_4" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu2_link_5" reason="Never" />
+    <disable_collisions link1="kr16_pedestal_foot" link2="qu2_link_6" reason="Never" />
+    <disable_collisions link1="qu1_base_link" link2="qu1_bracket" reason="Adjacent" />
+    <disable_collisions link1="qu1_base_link" link2="qu1_link_1" reason="Adjacent" />
+    <disable_collisions link1="qu1_base_link" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="qu1_base_link" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="qu1_base_link" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="qu1_base_link" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="qu1_base_link" link2="qu2_link_3" reason="Never" />
+    <disable_collisions link1="qu1_base_link" link2="qu2_link_4" reason="Never" />
+    <disable_collisions link1="qu1_base_link" link2="qu2_link_5" reason="Never" />
+    <disable_collisions link1="qu1_bracket" link2="qu1_link_1" reason="Never" />
+    <disable_collisions link1="qu1_bracket" link2="qu1_link_2" reason="Never" />
+    <disable_collisions link1="qu1_bracket" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="qu1_bracket" link2="qu2_bracket" reason="Adjacent" />
+    <disable_collisions link1="qu1_bracket" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="qu1_bracket" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="qu1_bracket" link2="qu2_link_3" reason="Never" />
+    <disable_collisions link1="qu1_bracket" link2="qu2_link_4" reason="Never" />
+    <disable_collisions link1="qu1_bracket" link2="qu2_link_5" reason="Never" />
+    <disable_collisions link1="qu1_link_1" link2="qu1_link_2" reason="Adjacent" />
+    <disable_collisions link1="qu1_link_1" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="qu1_link_1" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="qu1_link_1" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="qu1_link_1" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="qu1_link_1" link2="qu2_link_3" reason="Never" />
+    <disable_collisions link1="qu1_link_2" link2="qu1_link_3" reason="Adjacent" />
+    <disable_collisions link1="qu1_link_2" link2="qu1_link_4" reason="Never" />
+    <disable_collisions link1="qu1_link_2" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="qu1_link_2" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="qu1_link_2" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="qu1_link_3" link2="qu1_link_4" reason="Adjacent" />
+    <disable_collisions link1="qu1_link_3" link2="qu1_link_5" reason="Never" />
+    <disable_collisions link1="qu1_link_3" link2="qu1_link_6" reason="Never" />
+    <disable_collisions link1="qu1_link_3" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="qu1_link_3" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="qu1_link_3" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="qu1_link_4" link2="qu1_link_5" reason="Adjacent" />
+    <disable_collisions link1="qu1_link_4" link2="qu1_link_6" reason="Never" />
+    <disable_collisions link1="qu1_link_4" link2="qu2_base_link" reason="Never" />
+    <disable_collisions link1="qu1_link_4" link2="qu2_bracket" reason="Never" />
+    <disable_collisions link1="qu1_link_5" link2="qu1_link_6" reason="Adjacent" />
+    <disable_collisions link1="qu1_link_6" link2="qu2_link_6" reason="Never" />
+    <disable_collisions link1="qu2_base_link" link2="qu2_bracket" reason="Adjacent" />
+    <disable_collisions link1="qu2_base_link" link2="qu2_link_1" reason="Adjacent" />
+    <disable_collisions link1="qu2_bracket" link2="qu2_link_1" reason="Never" />
+    <disable_collisions link1="qu2_bracket" link2="qu2_link_2" reason="Never" />
+    <disable_collisions link1="qu2_link_1" link2="qu2_link_2" reason="Adjacent" />
+    <disable_collisions link1="qu2_link_2" link2="qu2_link_3" reason="Adjacent" />
+    <disable_collisions link1="qu2_link_2" link2="qu2_link_4" reason="Never" />
+    <disable_collisions link1="qu2_link_3" link2="qu2_link_4" reason="Adjacent" />
+    <disable_collisions link1="qu2_link_3" link2="qu2_link_5" reason="Never" />
+    <disable_collisions link1="qu2_link_3" link2="qu2_link_6" reason="Never" />
+    <disable_collisions link1="qu2_link_4" link2="qu2_link_5" reason="Adjacent" />
+    <disable_collisions link1="qu2_link_4" link2="qu2_link_6" reason="Never" />
+    <disable_collisions link1="qu2_link_5" link2="qu2_link_6" reason="Adjacent" />
+</robot>

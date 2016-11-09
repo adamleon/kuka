@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="kuka_kr6r900sixx" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Include robot xacro -->
+  <xacro:include filename="$(find kuka_kr6_support)/urdf/kr6r900sixx_macro.xacro" />
+  <xacro:include filename="$(find kuka_ipk_kr6r900sixx_support)/urdf/kuka_agilus_pedestal_macro.xacro" />
+
+  <!-- Set robot prefix -->
+  <xacro:property name="agilus1_prefix" value="ag1_"/>
+  <xacro:property name="agilus2_prefix" value="ag2_"/>
+
+  <!-- Create a fixed world coordinate system -->
+  <link name="world"/>
+
+  <!-- Load the two pedestals -->
+  <xacro:kuka_agilus_pedestal prefix="${agilus1_prefix}" parent_link="world">
+    <origin xyz="0 -0.6025 0" rpy="0 0 0"/>
+  </xacro:kuka_agilus_pedestal>
+  <xacro:kuka_agilus_pedestal prefix="${agilus2_prefix}" parent_link="world">
+    <origin xyz="0 0.6025 0" rpy="0 0 0"/>
+  </xacro:kuka_agilus_pedestal>
+
+  <!-- Load the two robots -->
+  <xacro:kuka_kr6r900sixx prefix="${agilus1_prefix}"/>
+  <xacro:kuka_kr6r900sixx prefix="${agilus2_prefix}"/>
+
+  <!-- Connect the robots to their respective pedestal -->
+  <joint name="${agilus1_prefix}_mount_joint" type="fixed">
+    <parent link="${agilus1_prefix}pedestal_mount_frame"/>
+    <child link="${agilus1_prefix}base_link"/>
+  </joint>
+  <joint name="${agilus2_prefix}_mount_joint" type="fixed">
+    <parent link="${agilus2_prefix}pedestal_mount_frame"/>
+    <child link="${agilus2_prefix}base_link"/>
+  </joint>
+</robot>

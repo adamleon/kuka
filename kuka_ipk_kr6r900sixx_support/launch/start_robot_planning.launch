@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- By default, do not start a RSI simulator -->
+  <arg name="sim" default="false" />
+  <!-- By default, start the rviz MoveIt! plugin -->
+  <arg name="rviz" default="true" />
+  <!-- By default, do not start a MoveIt! database -->
+  <arg name="db" default="false" />
+
+  <!-- Launch the hardware interface. If sim=true, a RSI simulator starts as well) -->
+  <include file="$(find kuka_ipk_kr6r900sixx_support)/launch/robot_interface.launch" >
+    <arg name="sim" value="$(arg sim)" />
+  </include>
+
+  <!-- Launch MoveIt! planning interface. If rviz=false, there will be no visual interface -->
+  <include file="$(find kuka_ipk_kr6r900sixx_moveit_config)/launch/moveit_planning_execution.launch">
+    <arg name="rviz" value="$(arg rviz)" />
+    <arg name="db" value="$(arg db)" />
+  </include>
+</launch>

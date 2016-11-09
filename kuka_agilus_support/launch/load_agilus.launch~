@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-  <!-- load robot description to parameter server -->
-  <param name="kuka_agilus_description" command="$(find xacro)/xacro.py '$(find kuka_agilus_support)/urdf/agilus.xacro'"/>
-  <!--<param name="robot_description" command="$(find xacro)/xacro.py '$(find kuka_agilus_support)/urdf/agilus.xacro'"/>-->
-
-</launch>

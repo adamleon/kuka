@@ -1,6 +1,0 @@
-<launch>
-    <!-- Launch kuka robot driver -->
-    <node name="kuka_driver" pkg="kuka_driver" type="kuka_driver.py" args="localhost" />
-    <!-- Launch kuka robot sensor interface router -->
-    <node name="kuka_rsi_router" pkg="kuka_driver" type="kuka_robot_sensor_interface_router.py" />
-</launch>

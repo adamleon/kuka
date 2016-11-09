@@ -1,0 +1,25 @@
+controller_list:
+  - name: fake_quantec1_controller
+    joints:
+      - qu1_joint_a1
+      - qu1_joint_a2
+      - qu1_joint_a3
+      - qu1_joint_a4
+      - qu1_joint_a5
+      - qu1_joint_a6
+  - name: fake_quantec2_controller
+    joints:
+      - qu2_joint_a1
+      - qu2_joint_a2
+      - qu2_joint_a3
+      - qu2_joint_a4
+      - qu2_joint_a5
+      - qu2_joint_a6
+  - name: fake_kr16_controller
+    joints:
+      - kr16_joint_a1
+      - kr16_joint_a2
+      - kr16_joint_a3
+      - kr16_joint_a4
+      - kr16_joint_a5
+      - kr16_joint_a6
