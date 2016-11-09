@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<!-- This file contains the URDF set up for an Agilus KR6 R900 sixx Robot -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <!-- Include resources -->
+  <xacro:include filename="$(find kuka_resources)/urdf/common_materials.xacro"/>
+  
+  <!-- Set up common parameters -->
+  <xacro:property name="DEG2RAD" value="0.017453292519943295"/>
+  <xacro:property name="PI" value="3.141592653589793"/>
+  
+  <!-- Create the robot -->
+  <xacro:macro name="kuka_agilus" params="prefix">
+    
+    <!-- LINKS -->
+    <!-- base link -->
+    <link name="${prefix}base_link">
+      <visual>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/visual/base_link.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+	<xacro:material_kuka_black/>
+      </visual>
+      <collision>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/collision/base_link.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+      </collision>
+    </link>
+    <!-- link 1 (A1) -->
+    <link name="${prefix}link_1">
+      <!-- main link body -->
+      <visual>
+	<origin xyz="0 0 -0.217" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/visual/link_1.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+	<xacro:material_kuka_orange/>
+      </visual>
+      <collision>
+	<origin xyz="0 0 -0.217" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/collision/link_1.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+      </collision>
+    </link>
+    <!-- link 2 (A2) -->
+    <link name="${prefix}link_2">
+      <visual>
+	<origin xyz="-0.025 0 -0.400" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/visual/link_2.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+	<xacro:material_kuka_orange/>
+      </visual>
+      <collision>
+	<origin xyz="-0.025 0 -0.400" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/collision/link_2.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+      </collision>
+    </link>
+    <!-- link 3 (A3)-->
+    <link name="${prefix}link_3">
+      <visual>
+	<origin xyz="-0.025 0 -0.855" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/visual/link_3.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+	<xacro:material_kuka_orange/>
+      </visual>
+      <collision>
+	<origin xyz="-0.025 0 -0.855" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/collision/link_3.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+      </collision>
+    </link>
+    <!-- link 4 (A4)-->
+    <link name="${prefix}link_4">
+      <visual>
+	<origin xyz="-0.132 0 -0.890" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/visual/link_4.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+	<xacro:material_kuka_orange/>
+      </visual>
+      <collision>
+	<origin xyz="-0.132 0 -0.890" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/collision/link_4.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+      </collision>
+    </link>
+    <!-- link 5 (A5)-->
+    <link name="${prefix}link_5">
+      <visual>
+	<origin xyz="-0.445 0 -0.890" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/visual/link_5.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+	<xacro:material_kuka_orange/>
+      </visual>
+      <collision>
+	<origin xyz="-0.445 0 -0.890" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/collision/link_5.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+      </collision>
+    </link>
+    <!-- link 6 (A6)-->
+    <link name="${prefix}link_6">
+      <visual>
+	<origin xyz="-0.511 0 -0.890" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/visual/link_6.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+	<xacro:material_kuka_black/>
+      </visual>
+      <collision>
+	<origin xyz="-0.511 0 -0.890" rpy="0 0 0"/>
+	<geometry>
+	  <mesh filename="package://kuka_agilus_support/meshes/agilus/collision/link_6.stl" scale="0.001 0.001 0.001" />
+	</geometry>
+      </collision>
+    </link>
+    <!-- tool link -->
+    <link name="${prefix}tool0"/>
+    <!-- END LINKS -->
+    
+    <!-- JOINTS -->
+    <!-- joint 1 (A1) -->
+    <joint name="${prefix}joint_1" type="revolute">
+      <origin xyz="0 0 0.217" rpy="0 0 0"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}link_1"/>
+      <axis xyz="0 0 -1"/>
+      <limit effort="0" lower="${-DEG2RAD * 170}" upper="${DEG2RAD * 170}" velocity="${DEG2RAD * 360}"/>
+    </joint>
+    <!-- joint 2 (A2) -->
+    <joint name="${prefix}joint_2" type="revolute">
+      <origin xyz="0.025 0 0.183" rpy="0 ${PI/2} 0"/>
+      <parent link="${prefix}link_1"/>
+      <child link="${prefix}link_2"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="0" lower="${-DEG2RAD * 190}" upper="${DEG2RAD * 45}" velocity="${DEG2RAD * 300}"/>
+    </joint>
+    <!-- joint 3 (A3) -->
+    <joint name="${prefix}joint_3" type="revolute">
+      <origin xyz="0 0 0.455" rpy="0 ${-PI/2} 0"/>
+      <parent link="${prefix}link_2"/>
+      <child link="${prefix}link_3"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="0" lower="${-DEG2RAD * 120}" upper="${DEG2RAD * 156}" velocity="${DEG2RAD * 360}"/>
+    </joint>
+    <!-- joint 4 (A4) -->
+    <joint name="${prefix}joint_4" type="revolute">
+      <origin xyz="0.107 0 0.035" rpy="0 0 0"/>
+      <parent link="${prefix}link_3"/>
+      <child link="${prefix}link_4"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="0" lower="${-DEG2RAD * 185}" upper="${DEG2RAD * 185}" velocity="${DEG2RAD * 381}"/>
+    </joint>
+    <!-- joint 5 (A5) -->
+    <joint name="${prefix}joint_5" type="revolute">
+      <origin xyz="0.313 0 0" rpy="0 0 0"/>
+      <parent link="${prefix}link_4"/>
+      <child link="${prefix}link_5"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="0" lower="${-DEG2RAD * 120}" upper="${DEG2RAD * 120}" velocity="${DEG2RAD * 388}"/>
+    </joint>
+    <!-- joint 6 (A6) -->
+    <joint name="${prefix}joint_6" type="revolute">
+      <origin xyz="0.070 0 0" rpy="0 0 0"/>
+      <parent link="${prefix}link_5"/>
+      <child link="${prefix}link_6"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="0" lower="${-DEG2RAD * 350}" upper="${DEG2RAD * 350}" velocity="${DEG2RAD * 615}"/>
+    </joint>
+    <!-- tool joint -->
+    <joint name="${prefix}joint_6-tool0" type="fixed">
+      <parent link="${prefix}link_6"/>
+      <child link="${prefix}tool0"/>
+      <origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+    </joint>
+    <!-- END JOINTS -->
+    
+  </xacro:macro>
+</robot>
+
+

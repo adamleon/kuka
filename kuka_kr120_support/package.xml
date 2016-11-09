@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+    <name>kuka_kr120_support</name>
+    <version>0.0.0</version>
+    <description>The kuka_kr120_support</description>
+
+    <maintainer email="lars.tingelstad@ntnu.no">lars</maintainer>
+
+    <license>BSD</license>
+
+    <url type="website">http://git-ipk-ntnu.dyndns.org/ros/kuka/tree/indigo-devel/kuka_kr120_support</url>
+    <url type="repository">git@git-ipk-ntnu.dyndns.org:ros/kuka.git</url>
+
+    <author email="lars.tingelstad@ntnu.no">Lars Tingelstad</author>
+    <author email="adam.l.kleppe@ntnu.no">Adam L. Kleppe</author>
+
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>roslaunch</build_depend>
+    <run_depend>robot_state_publisher</run_depend>
+    <run_depend>rviz</run_depend>
+    <run_depend>joint_state_publisher</run_depend>
+    <export>
+        <architecture_independent/>
+    </export>
+</package>

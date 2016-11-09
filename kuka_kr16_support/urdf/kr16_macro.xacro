@@ -1,0 +1,325 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find kuka_resources)/urdf/common_materials.xacro"/>
+
+    <xacro:property name="DEG2RAD" value="0.017453292519943295"/>
+    <xacro:property name="PI" value="3.141592653589793"/>
+
+    <xacro:macro name="kuka_kr16" params="prefix">
+
+        <!-- LINKS -->
+            <!-- base link -->
+            <link name="${prefix}base_link">
+                <visual>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/base_link.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_black/>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/base_link.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- link 1 (A1) -->
+            <link name="${prefix}link_1">
+                <!-- main link body -->
+                <visual>
+                    <origin xyz="0 0 -0.397" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_1.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_orange/>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 -0.397" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_1.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- link 2 -->
+            <link name="${prefix}link_2">
+                <visual>
+                    <origin xyz="-0.26 0 -0.675" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_2.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_orange/>
+                </visual>
+                <collision>
+                    <origin xyz="-0.26 0 -0.675" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_2.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- link 3 -->
+            <link name="${prefix}link_3">
+                <visual>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_3.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_orange/>
+                </visual>
+                <collision>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_3.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- link 4 -->
+            <link name="${prefix}link_4">
+                <visual>
+                    <origin xyz="-0.662 0 -1.32" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_4.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_orange/>
+                </visual>
+                <collision>
+                    <origin xyz="-0.662 0 -1.32" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_4.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- link 5 -->
+            <link name="${prefix}link_5">
+                <visual>
+                    <origin xyz="-0.930 0 -1.320" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_5.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_orange/>
+                </visual>
+                <collision>
+                    <origin xyz="-0.930 0 -1.320" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_5.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- link 6 -->
+            <link name="${prefix}link_6">
+                <visual>
+                    <origin xyz="-1.088 0 -1.320" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_6.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_black/>
+                </visual>
+                <collision>
+                    <origin xyz="-1.088 0 -1.320" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_6.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- tool 0 -->
+            <link name="${prefix}tool0"/>
+        <!-- END LINKS -->
+
+        <!-- JOINTS -->
+            <!-- joint 1 (A1) -->
+            <joint name="${prefix}joint_1" type="revolute">
+                <origin xyz="0 0 0.397" rpy="0 0 0"/>
+                <parent link="${prefix}base_link"/>
+                <child link="${prefix}link_1"/>
+                <axis xyz="0 0 -1"/>
+                <limit effort="0" lower="${-DEG2RAD * 185}" upper="${DEG2RAD * 185}" velocity="${DEG2RAD * 156}"/>
+            </joint>
+            <!-- joint 2 (A2) -->
+            <joint name="${prefix}joint_2" type="revolute">
+                <origin xyz="0.26 0 ${0.675-0.397}" rpy="0 ${PI/2} 0"/>
+                <parent link="${prefix}link_1"/>
+                <child link="${prefix}link_2"/>
+                <axis xyz="0 1 0"/>
+                <limit effort="0" lower="${-DEG2RAD * 155}" upper="${DEG2RAD * 35}" velocity="${DEG2RAD * 156}"/>
+            </joint>
+            <!-- joint 3 (A3) -->
+            <joint name="${prefix}joint_3" type="revolute">
+                <origin xyz="0 0 0.68" rpy="0 ${-PI/2} 0"/>
+                <parent link="${prefix}link_2"/>
+                <child link="${prefix}link_3"/>
+                <axis xyz="0 1 0"/>
+                <limit effort="0" lower="${-DEG2RAD * 130}" upper="${DEG2RAD * 154}" velocity="${DEG2RAD * 156}"/>
+            </joint>
+            <!-- joint 4 (A4) -->
+            <joint name="${prefix}joint_4" type="revolute">
+                <origin xyz="${0.662-0.26} 0 -0.035" rpy="0 0 0"/>
+                <parent link="${prefix}link_3"/>
+                <child link="${prefix}link_4"/>
+                <axis xyz="-1 0 0"/>
+                <limit effort="0" lower="${-DEG2RAD * 350}" upper="${DEG2RAD * 350}" velocity="${DEG2RAD * 330}"/>
+            </joint>
+            <!-- joint 5 (A5) -->
+            <joint name="${prefix}joint_5" type="revolute">
+                <origin xyz="${0.93-0.662} 0 0" rpy="0 0 0"/>
+                <parent link="${prefix}link_4"/>
+                <child link="${prefix}link_5"/>
+                <axis xyz="0 1 0"/>
+                <limit effort="0" lower="${-DEG2RAD * 130}" upper="${DEG2RAD * 130}" velocity="${DEG2RAD * 330}"/>
+            </joint>
+            <!-- joint 6 (A6) -->
+            <joint name="${prefix}joint_6" type="revolute">
+                <origin xyz="${1.088-0.93} 0 0" rpy="0 0 0"/>
+                <parent link="${prefix}link_5"/>
+                <child link="${prefix}link_6"/>
+                <axis xyz="-1 0 0"/>
+                <limit effort="0" lower="${-DEG2RAD * 350}" upper="${DEG2RAD * 350}" velocity="${DEG2RAD * 615}"/>
+            </joint>
+            <!-- tool frame - fixed frame -->
+            <joint name="${prefix}joint_6-tool0" type="fixed">
+                <parent link="${prefix}link_6"/>
+                <child link="${prefix}tool0"/>
+                <origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+            </joint>
+        <!-- END JOINTS -->
+
+        <!-- MOTORS -->
+            <!-- A1 motor link -->
+            <link name="${prefix}link_1_motor1">
+                <visual>
+                    <origin xyz="0 0 -0.397" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_1_motor1.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_black/>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 -0.397" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_1_motor1.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- A2 motor link -->
+            <link name="${prefix}link_1_motor2">
+                <visual>
+                    <origin xyz="0 0 -0.397" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_1_motor2.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_black/>
+                </visual>
+                <collision>
+                    <origin xyz="0 0 -0.397" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_1_motor2.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- A3 motor link -->
+            <link name="${prefix}link_3_motor4">
+                <visual>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_3_motor4.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_black/>
+                </visual>
+                <collision>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_3_motor4.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- A4 motor link  -->
+            <link name="${prefix}link_3_motor1">
+                <visual>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_3_motor1.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_black/>
+                </visual>
+                <collision>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_3_motor1.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- A5 motor link-->
+            <link name="${prefix}link_3_motor2">
+                <visual>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_3_motor2.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_black/>
+                </visual>
+                <collision>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_3_motor2.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- A6 motor link -->
+            <link name="${prefix}link_3_motor3">
+                <visual>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/visual/link_3_motor3.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                    <xacro:material_kuka_black/>
+                </visual>
+                <collision>
+                    <origin xyz="-0.26 0 -1.355" rpy="0 0 0"/>
+                    <geometry>
+                        <mesh filename="package://kuka_kr16_support/meshes/kr16/collision/link_3_motor3.stl" scale="0.001 0.001 0.001" />
+                    </geometry>
+                </collision>
+            </link>
+            <!-- A1 motor joint -->
+            <joint name="${prefix}joint_1_motor1" type="fixed">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <parent link="${prefix}link_1"/>
+                <child link="${prefix}link_1_motor1"/>
+            </joint>
+            <!-- A2 motor joint -->
+            <joint name="${prefix}joint_1_motor2" type="fixed">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <parent link="${prefix}link_1"/>
+                <child link="${prefix}link_1_motor2"/>
+            </joint>
+            <!-- A3 motor joint -->
+            <joint name="${prefix}joint_3_motor1" type="fixed">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <parent link="${prefix}link_3"/>
+                <child link="${prefix}link_3_motor1"/>
+            </joint>
+            <!-- A4 motor joint -->
+            <joint name="${prefix}joint_3_motor2" type="fixed">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <parent link="${prefix}link_3"/>
+                <child link="${prefix}link_3_motor2"/>
+            </joint>
+            <!-- A5 motor joint -->
+            <joint name="${prefix}joint_3_motor3" type="fixed">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <parent link="${prefix}link_3"/>
+                <child link="${prefix}link_3_motor3"/>
+            </joint>
+            <!-- A6 motor joint -->
+            <joint name="${prefix}joint_3_motor4" type="fixed">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <parent link="${prefix}link_3"/>
+                <child link="${prefix}link_3_motor4"/>
+            </joint>
+        <!-- END MOTORS -->
+
+    </xacro:macro>
+</robot>
+
+

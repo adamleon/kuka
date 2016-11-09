@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+ <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+   
+   <xacro:property name="pi" value="3.14159265" />
+   
+   <xacro:macro name="kuka_link" params="link_name color *origin">
+     <link name="${prefix}${link_name}">
+       <visual>
+         <xacro:insert_block name="origin"/>
+         <geometry>
+           <mesh filename="package://${package_name}/meshes/${robot_type}/visual/${link_name}.stl" scale="${mesh_scale}" />
+         </geometry>
+         <material name="${color}"/>
+       </visual>
+       <collision>
+         <xacro:insert_block name="origin"/>
+         <geometry>
+           <mesh filename="package://${package_name}/meshes/${robot_type}/visual/${link_name}.stl" scale="${mesh_scale}" />
+         </geometry>
+       </collision>
+     </link>
+   </xacro:macro>
+   
+   <xacro:macro name="kuka_joint" params="joint_name parent_link child_link *origin *axis *limit">
+     <joint name="${prefix}${joint_name}" type="revolute">
+       <parent link="${prefix}${parent_link}"/>
+       <child link="${prefix}${child_link}"/>
+       <xacro:insert_block name="axis" />
+       <xacro:insert_block name="limit" />
+       <xacro:insert_block name="origin" />
+     </joint>
+   </xacro:macro>
+   
+   <xacro:macro name="kuka_motor" params="parent_link_number motor_number *origin" >
+     <joint name="${prefix}joint${parent_link_number}_${motor_number}" type="fixed">
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <parent link="${prefix}link_${parent_link_number}"/>
+       <child link="${prefix}link_${parent_link_number}_motor${motor_number}"/>
+     </joint>
+     <xacro:kuka_link link_name="link_${parent_link_number}_motor${motor_number}" color="kuka_black">
+       <xacro:insert_block name="origin" />
+     </xacro:kuka_link>
+   </xacro:macro>
+   
+ </robot>
+ 

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- This file contains the launch sequence for testing the Agilus cell URDF -->
+<launch>
+  <!-- Load the Agilus cell -->
+  <include file="$(find kuka_agilus_support)/launch/load_agilus.launch" />
+
+  <!-- Load the joint state publisher -->
+  <node name="agilus_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="true" />
+  </node>
+  <node name="agilus_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <!-- Load RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kuka_agilus_support)/config/robot_state_visualize.rviz" required="true" />
+
+</launch>

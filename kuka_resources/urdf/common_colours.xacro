@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!-- This file contains the URDF parameters for the common kuka colors -->
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:property name="color_kuka_orange" value="1.0 0.5 0.0 1.0"/>
+    <xacro:property name="color_kuka_black" value="0.05 0.05 0.05 1.0"/>
+</robot>

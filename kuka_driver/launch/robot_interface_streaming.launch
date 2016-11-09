@@ -1,0 +1,10 @@
+<launch>
+
+
+
+    <!-- joint_trajectory_action: provides actionlib interface for
+         high-level robot control -->
+    <node pkg="industrial_robot_client" type="joint_trajectory_action"
+        name="joint_trajectory_action" />
+
+</launch>

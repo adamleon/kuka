@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <name>kuka_kr5_support</name>
+  <version>0.0.1</version>
+  <description>The kuka_kr5_support package</description>
+
+  <author email="lars.tingelstad@ntnu.no">Lars Tingelstad</author>
+  <maintainer email="lars.tingelstad@ntnu.no">Lars Tingelstad</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://git-ipk-ntnu.dyndns.org/ros/kuka/tree/indigo-devel/kuka_kr5_support</url>
+  <url type="repository">git@git-ipk-ntnu.dyndns.org:ros/kuka.git</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+
+  <export>
+    <!-- You can specify that this package is a metapackage here: -->
+    <!-- <metapackage/> -->
+
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+
+</package>

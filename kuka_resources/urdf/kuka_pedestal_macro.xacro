@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="kuka_pedestal" params="prefix parent_link *origin height">
+
+        <link name="${prefix}pedestal_flange">
+            <visual>
+                <origin xyz="0 0 0.015" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="0.35" length="0.03"/>
+                </geometry>
+                <material name="gray">
+                    <color rgba="0.5 0.5 0.5 1"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0.015" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="0.35" length="0.03"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <link name="${prefix}pedestal_body">
+            <visual>
+                <origin xyz="0 0 ${height / 2}" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="0.285" length="${height}"/>
+                </geometry>
+                <material name="gray">
+                    <color rgba="0.5 0.5 0.5 1"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 ${height / 2}" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="0.28" length="${height}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <link name="${prefix}pedestal_mount_frame"/>
+
+        <joint name="${prefix}pedestal_flange_joint" type="fixed">
+            <insert_block name="origin"/>
+            <parent link="${parent_link}"/>
+            <child link="${prefix}pedestal_flange"/>
+        </joint>
+
+        <joint name="${prefix}pedestal_body_joint" type="fixed">
+            <parent link="${prefix}pedestal_flange"/>
+            <child link="${prefix}pedestal_body"/>
+        </joint>
+
+        <joint name="${prefix}pedestal_mount_joint" type="fixed">
+            <origin xyz="0 0 ${height}" rpy="0 0 0"/>
+            <parent link="${prefix}pedestal_flange"/>
+            <child link="${prefix}pedestal_mount_frame"/>
+        </joint>
+
+    </xacro:macro>
+
+</robot>
